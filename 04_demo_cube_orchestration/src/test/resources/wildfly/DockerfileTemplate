@@ -1,0 +1,5 @@
+FROM jboss/wildfly:8.2.0.Final
+COPY mysql-connector-java-5.1.35.jar /opt/jboss/wildfly/standalone/deployments/
+COPY mysql-ds.xml /opt/jboss/wildfly/standalone/deployments/
+COPY ${deployableFilename} /opt/jboss/wildfly/standalone/deployments/${deployableFilename}
+ENV JAVA_OPTS="-Dmysql.service=\$MYSQL_SERVICE_SERVICE_HOST"

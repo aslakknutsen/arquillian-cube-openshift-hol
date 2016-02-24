@@ -1,0 +1,13 @@
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema">
+  <datasource jndi-name="java:/mysql_ds" pool-name="MySQLPool">
+    <connection-url>jdbc:mysql://${mysql.service}:3306/ape</connection-url>
+    <driver>mysql-connector-java-5.1.35.jar_com.mysql.jdbc.Driver_5_1</driver>
+    <pool>
+      <max-pool-size>30</max-pool-size>
+    </pool>
+    <security>
+      <user-name>ape</user-name>
+      <password>letmein</password>
+    </security>
+  </datasource>
+</datasources>

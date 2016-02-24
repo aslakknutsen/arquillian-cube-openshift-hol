@@ -1,0 +1,23 @@
+{
+	"apiVersion":"v1",
+	"kind": "Pod",
+	"metadata": {
+		"name": "arquillian-nodejs",
+		"labels": {
+			"name": "arquillian-nodejs"
+		}
+	},
+	"spec": {
+		"containers": [{
+			"name": "arquillian-nodejs",
+			"image": "arquillian:./src/test/resources",
+            "ports": [
+                {
+                    "hostPort": 8580,
+                    "containerPort": 8580,
+                    "protocol": "TCP"
+                }
+            ]
+		}]
+	}
+}

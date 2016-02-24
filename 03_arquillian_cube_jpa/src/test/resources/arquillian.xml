@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian xmlns="http://jboss.org/schema/arquillian"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+        http://jboss.org/schema/arquillian
+        http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+
+  <!--tag::arquillian_cube_jpa_config[]-->
+<extension qualifier="openshift">
+    <property name="originServer">https://192.168.3.83:8443</property>
+    <property name="namespace">demo</property>
+    <property name="definitionsFile">src/test/resources/wildfly_pod.json</property> <!--1-->
+  </extension>
+  
+  <container qualifier="wildfly-server" default="true"><!--2-->
+    <configuration>
+      <property name="containerlessDocker">wildfly</property>
+      <property name="embeddedPort">8080</property>
+    </configuration>
+  </container>
+  <!--end::arquillian_cube_jpa_config[]-->
+
+  <extension qualifier="persistence">
+    <property name="defaultDataSource">java:jboss/datasources/ExampleDS</property>
+  </extension>
+
+  <extension qualifier="transaction">
+    <property name="manager">java:jboss/UserTransaction</property>
+  </extension>
+
+  <extension qualifier="persistence-script">
+    <property name="scriptsToExecuteBeforeTest">SET REFERENTIAL_INTEGRITY FALSE</property>
+    <property name="sqlStatementDelimiter">NEW_LINE</property>
+  </extension>
+
+  <extension qualifier="persistence-dbunit">
+    <property name="datatypeFactory">org.dbunit.ext.h2.H2DataTypeFactory</property>
+  </extension>
+
+</arquillian>
